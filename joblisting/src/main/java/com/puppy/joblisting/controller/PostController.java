@@ -17,6 +17,12 @@ public class PostController {
     @Autowired
     PostRepository repo;
 
+    // posts/java
+    @GetMapping("/posts/{text}")
+    public List<Post> search(@PathVariable String text) {
+        return repo.findAll();
+    }
+
     @ApiIgnore
     @RequestMapping(value="/")
     public void redirect(HttpServletResponse response) throws IOException {
