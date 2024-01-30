@@ -1,8 +1,9 @@
 package com.puppy.joblisting.controller;
 
 
-import com.puppy.joblisting.PostRepository;
+import com.puppy.joblisting.repository.PostRepository;
 import com.puppy.joblisting.model.Post;
+import com.puppy.joblisting.repository.SearchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
@@ -17,10 +18,13 @@ public class PostController {
     @Autowired
     PostRepository repo;
 
+    @Autowired
+    SearchRepository srepo;
+
     // posts/java
     @GetMapping("/posts/{text}")
     public List<Post> search(@PathVariable String text) {
-        return repo.findAll();
+        return srepo.findByText(text);
     }
 
     @ApiIgnore
